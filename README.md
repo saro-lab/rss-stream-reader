@@ -85,5 +85,3 @@ var rss = reader.url("https://test/rss.xml", (item, channel) -> {
 
 ## see
 - [가리사니 개발자공간](https://gs.saro.me)
-- [한국어 설명](https://gs.saro.me/lab?topicId=426)
-
