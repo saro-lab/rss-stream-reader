@@ -8,12 +8,12 @@ The RSS Stream Reader is very fast and performs real-time processing through the
 
 ## gradle kts
 ```
-implementation('me.saro:rss-stream-reader:1.0')
+implementation("me.saro:rss-stream-reader:1.0")
 ```
 
 ## gradle
 ```
-compile 'me.saro:rss-stream-reader:1.0'
+compile "me.saro:rss-stream-reader:1.0"
 ```
 
 ## maven
