@@ -4,6 +4,7 @@ package me.saro.rss.core
  * https://validator.w3.org/feed/docs/rss2.html
  */
 class RssItem(
+    val channel: RssChannel,
     var title: String = "",
     var link: String = "",
     var description: String = "",

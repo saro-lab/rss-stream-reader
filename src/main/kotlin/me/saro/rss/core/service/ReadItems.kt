@@ -10,13 +10,13 @@ import javax.xml.stream.XMLStreamReader
 class ReadItems {
     companion object {
         fun handle(channel: RssChannel, reader: XMLStreamReader, includeNonStandard: Boolean, continues: (RssItem, RssChannel) -> Boolean) {
-            var item = RssItem()
+            var item = RssItem(channel)
             do {
                 when (val name = XmlReadUtil.moveNextTag(reader)) {
                     "", "item" -> {
                         if (continues(item, channel)) {
                             channel.items.addFirst(item)
-                            item = RssItem()
+                            item = RssItem(channel)
                             continue
                         }
                         return
