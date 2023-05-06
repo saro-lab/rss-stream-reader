@@ -19,15 +19,21 @@ class RssStreamReader(
     private val includeNonStandard: Boolean
 ) {
     fun url(url: String): RssChannel =
-        URL(url).openStream().use { stream(it, "UTF-8") }
+        URL(url).openStreamWithAgent().use { stream(it, "UTF-8") }
     fun url(url: String, continues: (RssItem, RssChannel) -> Boolean): RssChannel =
-        URL(url).openStream().use { stream(it, "UTF-8", continues) }
+        URL(url).openStreamWithAgent().use { stream(it, "UTF-8", continues) }
+
+    fun url(url: String, charset: String?, continues: (RssItem, RssChannel) -> Boolean): RssChannel =
+        URL(url).openStreamWithAgent().use { stream(it, charset, continues) }
 
     fun url(url: URL): RssChannel =
-        url.openStream().use { stream(it, "UTF-8") }
+        url.openStreamWithAgent().use { stream(it, "UTF-8") }
 
     fun url(url: URL, continues: (RssItem, RssChannel) -> Boolean): RssChannel =
-        url.openStream().use { stream(it, "UTF-8", continues) }
+        url.openStreamWithAgent().use { stream(it, "UTF-8", continues) }
+
+    fun url(url: URL, charset: String?, continues: (RssItem, RssChannel) -> Boolean): RssChannel =
+        url.openStreamWithAgent().use { stream(it, charset, continues) }
 
     fun text(text: String): RssChannel =
         read(XMLInputFactory.newFactory().createXMLStreamReader(StringReader(text)))
@@ -41,10 +47,10 @@ class RssStreamReader(
     fun reader(reader: Reader, continues: (RssItem, RssChannel) -> Boolean = { _, _ -> true }): RssChannel =
         read(XMLInputFactory.newFactory().createXMLStreamReader(reader), continues)
 
-    fun stream(inputStream: InputStream, charset: String): RssChannel =
+    fun stream(inputStream: InputStream, charset: String?): RssChannel =
         read(XMLInputFactory.newFactory().createXMLStreamReader(inputStream, charset))
 
-    fun stream(inputStream: InputStream, charset: String, continues: (RssItem, RssChannel) -> Boolean): RssChannel =
+    fun stream(inputStream: InputStream, charset: String?, continues: (RssItem, RssChannel) -> Boolean): RssChannel =
         read(XMLInputFactory.newFactory().createXMLStreamReader(inputStream, charset), continues)
 
     private fun read(xmlStreamReader: XMLStreamReader, continues: (RssItem, RssChannel) -> Boolean = { _, _ -> true }) =

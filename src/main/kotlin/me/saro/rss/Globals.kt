@@ -7,5 +7,5 @@ const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/53
 
 fun URL.openStreamWithAgent(): InputStream =
     this.openConnection().apply {
-        //setRequestProperty("User-Agent", USER_AGENT)
+        setRequestProperty("User-Agent", USER_AGENT)
     }.getInputStream()
