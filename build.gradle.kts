@@ -33,7 +33,7 @@ plugins {
 }
 
 group = "me.saro"
-version = "1.0"
+version = "1.1"
 
 val scGroupId = group as String
 val scArtifactId = "rss-stream-reader"
